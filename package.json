@@ -1,0 +1,36 @@
+{
+  "name": "easylog-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "scripts": {
+    "watch": "rollup -c --watch",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamiky/easylog-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamiky/easylog-sdk/issues"
+  },
+  "homepage": "https://github.com/kamiky/easylog-sdk#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "rollup": "^2.0.3",
+    "rollup-plugin-copy": "^3.3.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "detect-browser": "^5.0.0"
+  }
+}
