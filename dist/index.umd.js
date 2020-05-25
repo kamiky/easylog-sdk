@@ -1199,7 +1199,7 @@
 
       this.queue = [];
       this.processing = 0;
-      this.api = 'http://alexis-baranger.com/easylog'; // this.api = `https://api.easylog.io/send`
+      this.api = 'http://alexis-baranger.com/easylog/v1'; // this.api = `https://api.easylog.io/send`
     }
 
     var _proto = EasyLogLib.prototype;
