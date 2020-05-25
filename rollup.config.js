@@ -22,6 +22,7 @@ export default [
       babel({
         exclude: 'node_modules/**', // only transpile our source code
         babelrc: false,
+        // plugins: ['@babel/plugin-transform-runtime'],
         presets: [
           [
             '@babel/preset-env',
@@ -32,13 +33,14 @@ export default [
               loose: true,
               modules: false,
               useBuiltIns: false,
+              // corejs: 3,
               debug: true,
             },
           ],
         ],
       }),
       commonjs(), // so Rollup can convert `ms` to an ES module
-      terser(),
+      // terser(),
     ],
     external: ['axios'],
   },

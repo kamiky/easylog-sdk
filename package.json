@@ -25,6 +25,7 @@
   "homepage": "https://github.com/kamiky/easylog-sdk#readme",
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/plugin-transform-spread": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
     "@rollup/plugin-babel": "^5.0.2",
@@ -37,6 +38,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "core-js": "3",
     "detect-browser": "^5.0.0"
   }
 }
