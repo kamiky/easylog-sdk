@@ -2,7 +2,7 @@
   "name": "easylog-sdk",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.umd.js",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "browser": "dist/index.umd.js",
   "files": [
@@ -24,10 +24,16 @@
   },
   "homepage": "https://github.com/kamiky/easylog-sdk#readme",
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-spread": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@rollup/plugin-babel": "^5.0.2",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "rollup": "^2.0.3",
-    "rollup-plugin-copy": "^3.3.0"
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-terser": "5.3.0"
   },
   "dependencies": {
     "axios": "^0.19.2",

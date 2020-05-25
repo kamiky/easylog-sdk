@@ -1,7 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import babel from '@rollup/plugin-babel'
 import copy from 'rollup-plugin-copy'
 import pkg from './package.json'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
   // browser-friendly UMD build
@@ -10,22 +12,35 @@ export default [
     output: {
       name: 'easylog',
       format: 'umd',
-      file: pkg.browser
+      file: pkg.browser,
     },
     watch: {
-      include: 'src/**'
+      include: 'src/**',
     },
     plugins: [
       resolve(), // so Rollup can find npm modules
+      babel({
+        exclude: 'node_modules/**', // only transpile our source code
+        babelrc: false,
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: {
+                browsers: ['last 1 version', '> 1%', 'IE 6'],
+              },
+              loose: true,
+              modules: false,
+              useBuiltIns: false,
+              debug: true,
+            },
+          ],
+        ],
+      }),
       commonjs(), // so Rollup can convert `ms` to an ES module
-      // copy({
-      //   targets: [
-      //     { src: 'dist/*', dest: '../web/node_modules/easylog/dist' },
-      //     { src: 'package.json', dest: '../web/node_modules/easylog' },
-      //   ]
-      // })
+      terser(),
     ],
-    external: ['axios']
+    external: ['axios'],
   },
   // CommonJS (for Node) and ES module (for bundlers) build.
   // (We could have three entries in the configuration array
@@ -37,8 +52,11 @@ export default [
   //   input: 'src/index.js',
   //   external: ['axios'],
   //   watch: {
-  //     include: 'src/**'
+  //     include: 'src/**',
   //   },
-  //   output: [{ file: pkg.main, format: 'cjs' }, { file: pkg.module, format: 'es' }]
-  // }
+  //   output: [
+  //     { file: pkg.main, format: 'cjs' },
+  //     { file: pkg.module, format: 'es' },
+  //   ],
+  // },
 ]
