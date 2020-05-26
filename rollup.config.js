@@ -50,15 +50,15 @@ export default [
   // builds from a single configuration where possible, using
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
-  // {
-  //   input: 'src/index.js',
-  //   external: ['axios'],
-  //   watch: {
-  //     include: 'src/**',
-  //   },
-  //   output: [
-  //     { file: pkg.main, format: 'cjs' },
-  //     { file: pkg.module, format: 'es' },
-  //   ],
-  // },
+  {
+    input: 'src/index.js',
+    external: ['axios'],
+    watch: {
+      include: 'src/**',
+    },
+    output: [
+      { file: pkg.main, format: 'cjs' } /* required for SSR */,
+      { file: pkg.module, format: 'es' },
+    ],
+  },
 ]

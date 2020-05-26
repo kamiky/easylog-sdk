@@ -1194,7 +1194,6 @@
 
   var EasyLogLib = /*#__PURE__*/function () {
     function EasyLogLib(config) {
-      console.log('ahb');
       this.config = config || {}; // this.api = `http://localhost:5151/v1`
 
       this.queue = [];
@@ -1365,7 +1364,7 @@
   var EasyLogWrapper = /*#__PURE__*/function () {
     function EasyLogWrapper(config) {
       var cookies = js_cookie.get();
-      var distinct_id = cookies['_el'];
+      var distinct_id = cookies && cookies['_el'];
 
       if (!distinct_id) {
         distinct_id = utils.generateRandom(30);
