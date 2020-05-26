@@ -59,7 +59,7 @@ class EasyLogLib {
 		// this.api = `http://localhost:5151/v1`
 		this.queue = [];
 		this.processing = 0;
-		this.api = 'http://alexis-baranger.com/easylog/v1';
+		this.api = 'https://alexis-baranger.com/easylog/v1';
 		// this.api = `https://api.easylog.io/send`
 	}
 	init(access_token) {
