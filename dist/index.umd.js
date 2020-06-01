@@ -1014,6 +1014,7 @@
         browser_version: browser.version,
         OS: browser.os,
         currentUrl: window.location.href || document.URL,
+        userAgent: navigator.userAgent,
         screen_width: window.innerWidth,
         screen_height: window.innerHeight
       };
