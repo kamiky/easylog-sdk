@@ -67,18 +67,18 @@ class EasyLogLib {
 		this.config.access_token = access_token;
 	}
 
-	post(params) {
+	post(endpoint, params) {
 		if (this.processing) {
-			this.queue.push(params);
+			this.queue.push({ endpoint, params });
 		} else {
-			this.processQueue(params);
+			this.processQueue({ endpoint, params });
 		}
 	}
 
-	async processQueue(params) {
+	async processQueue({ endpoint, params }) {
 		this.processing++;
 		try {
-			const result = await axios.post(this.api + '/send', params);
+			const result = await axios.post(this.api + endpoint, params);
 		} catch (err) {
 			console.error(err);
 		}
@@ -92,7 +92,15 @@ class EasyLogLib {
 		const distinct_id = this.config.distinct_id;
 		const access_token = this.config.access_token;
 		const datetime = new Date();
-		this.post({ distinct_id, level, event_name, access_token, properties, datetime, device: utils.getDevice() });
+		this.post('/send', {
+			distinct_id,
+			level,
+			event_name,
+			access_token,
+			properties,
+			datetime,
+			device: utils.getDevice(),
+		});
 	}
 
 	async identify(properties) {
@@ -103,7 +111,7 @@ class EasyLogLib {
 				Cookies.set('_el', properties.id);
 			}
 			const access_token = this.config.access_token;
-			const result = await axios.post(this.api + '/identify', {
+			const result = await this.post('/identify', {
 				distinct_id: old_distinct_id,
 				access_token,
 				device: utils.getDevice(),

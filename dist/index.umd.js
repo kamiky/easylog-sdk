@@ -1208,49 +1208,56 @@
       this.config.access_token = access_token;
     };
 
-    _proto.post = function post(params) {
+    _proto.post = function post(endpoint, params) {
       if (this.processing) {
-        this.queue.push(params);
+        this.queue.push({
+          endpoint: endpoint,
+          params: params
+        });
       } else {
-        this.processQueue(params);
+        this.processQueue({
+          endpoint: endpoint,
+          params: params
+        });
       }
     };
 
     _proto.processQueue = /*#__PURE__*/function () {
-      var _processQueue = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(params) {
-        var result;
+      var _processQueue = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
+        var endpoint, params, result;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                endpoint = _ref.endpoint, params = _ref.params;
                 this.processing++;
-                _context.prev = 1;
-                _context.next = 4;
-                return axios.post(this.api + '/send', params);
+                _context.prev = 2;
+                _context.next = 5;
+                return axios.post(this.api + endpoint, params);
 
-              case 4:
+              case 5:
                 result = _context.sent;
-                _context.next = 10;
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](1);
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](2);
                 console.error(_context.t0);
 
-              case 10:
+              case 11:
                 this.processing--;
 
                 if (this.queue.length > 0) {
                   this.processQueue(this.queue.shift());
                 }
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[1, 7]]);
+        }, _callee, this, [[2, 8]]);
       }));
 
       function processQueue(_x) {
@@ -1270,7 +1277,7 @@
                 distinct_id = this.config.distinct_id;
                 access_token = this.config.access_token;
                 datetime = new Date();
-                this.post({
+                this.post('/send', {
                   distinct_id: distinct_id,
                   level: level,
                   event_name: event_name,
@@ -1312,7 +1319,7 @@
 
                 access_token = this.config.access_token;
                 _context3.next = 6;
-                return axios.post(this.api + '/identify', _extends({
+                return this.post('/identify', _extends({
                   distinct_id: old_distinct_id,
                   access_token: access_token,
                   device: utils.getDevice()
